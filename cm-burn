@@ -53,8 +53,6 @@ Description:
 Example:
   cm-burn create --group=red --names=red[5-6] --ip=192.168.1.[5-6]
 """
-from __future__ import print_function
-
 import os
 import subprocess
 from docopt import docopt
@@ -162,6 +160,7 @@ class piburner(object):
         :param path:
         :return:
         """
+        
         if platform.system() == 'Windows':
             #TODO: Remove drive in windows, why can you not use the mount function build into windows?
             #TODO: Why do you need RemoveDrive?
@@ -178,13 +177,13 @@ class piburner(object):
             # extFS does outomount so we just check i f they are mounted
             # TODO: check if they exist
             pass
-            if drive is None:
-                drives = ['/Volume/boot', 'Volume/rootfs']
-            else:
-                drives = [drive]
-            for drive in drives:
-                if not os.path.isdir(drive):
-                    ERROR('drive is not mounted:', drive)
+            # if drive is None:
+            #     drives = ['/Volume/boot', 'Volume/rootfs']
+            # else:
+            #     drives = [drive]
+            # for drive in drives:
+            #     if not os.path.isdir(drive):
+            #         ERROR('drive is not mounted:', drive)
 
             #
             # if drive is None:
@@ -213,7 +212,7 @@ class piburner(object):
 
 
         # activate ssh by creating an empty ssh file in the boot drive
-        Path(self.filename("/ssh")).touch()
+        pathlib.Path(self.filename("/ssh")).touch()
         # Write the content of the ssh rsa to the authorized_keys file
         key = pathlib.Path(public_key).read_text()
         ssh_dir = self.filename("/home/pi/.ssh")
@@ -234,7 +233,6 @@ class piburner(object):
 
             # print(yaml.dump(information, default_flow_style=False))
             pprint(information)
-
 
     # ok osx
     def write_hostname(self, host):
@@ -477,7 +475,7 @@ class piburner(object):
                         key_mgmt=WPA-PSK
                 }}""".format(network=ssid, pwd=psk))
         print(wifi)
-        Path(self.filename("/etc/wpa_supplicant/wpa_supplicant.conf")).write_text(wifi)
+        pathlib.Path(self.filename("/etc/wpa_supplicant/wpa_supplicant.conf")).write_text(wifi)
 
     
 
@@ -548,7 +546,9 @@ class piburner(object):
         """
         if device is None:
             # activate an image and create a yaml file cmburn.yaml with parameter that is read upon start in __init___
-            output = run("sudo", "ls",  "-ltr",  "/dev/*")
+            
+            # output = run("sudo", "ls",  "-ltr",  "/dev/*")
+            output = run("sudo ls -ltr /dev/*")
             # TODO: find mmcblk0
             device = "mmcblk0" # hard coded for now
             print(output)
