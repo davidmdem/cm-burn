@@ -51,7 +51,7 @@ interface with your local Laptop to the cluster via Wifi.  The setup
 is illustrated in Figure Networking.
 
 
-![](images/network.png)
+![](doc/images/network.png)
 
 Figure: Networking
 
@@ -87,7 +87,7 @@ To integrate the clusters into a single network, we need a switch  or combinatio
 This is depicted in the Figure Cluster of Clusters
 
 
-![](images/network-cluster.png)
+![](doc/images/network-cluster.png)
 
 Each cluster is naemed cluster01-clusterNN. The hostnames are node followed by 3 zeros padded with the node number
 There is a correlation between the cluster number and the node numbers in the following interval
@@ -117,7 +117,7 @@ The easiest way to duplicate the SD card is simply to clone it with
 the build in SD Card copier. This program can be found in the menu
 under Accessories.
 
-![SD Card Copier](images/sdcc.png) 
+![SD Card Copier](doc/images/sdcc.png) 
 
 Figure: SD Card Copier
 
@@ -141,7 +141,7 @@ TODO: Python3
 ```sudo ls -ltr /dev/*```
 
 
-```sudo dd bs=1M if=~/.cloudmesh/images/imagename.img of=mmcblk0 status=progress conv=fsync```
+```sudo dd bs=1M if=~/.cloudmesh/doc/images/imagename.img of=mmcblk0 status=progress conv=fsync```
 
 
 ### OSX 
